@@ -1,0 +1,3 @@
+[submodule "carelink-hospital-hub"]
+	path = carelink-hospital-hub
+	url = https://github.com/Deepansh-tandon/carelink-hospital-hub.git
