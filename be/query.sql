@@ -175,11 +175,17 @@ BEGIN
   SET p_rows = ROW_COUNT();
 END $$
 
+DELIMITER $$
+
 CREATE TRIGGER trg_Medicines_Update
 BEFORE UPDATE ON medicines
 FOR EACH ROW
 BEGIN
+  SET NEW.last_updated = CURRENT_TIMESTAMP;
 END $$
+
+DELIMITER ;
+
 
 CREATE PROCEDURE sp_ProcessLowStock()
 BEGIN

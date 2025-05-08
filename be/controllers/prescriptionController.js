@@ -159,7 +159,7 @@ export const updatePrescription = async (req, res) => {
     });
   }
 };
-
+ 
 export const deletePrescription = async (req, res) => {
   try {
     const id = parseInt(req.params.id);

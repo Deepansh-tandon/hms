@@ -76,6 +76,31 @@ class Bill {
       throw new Error('Error deleting bill');
     }
   }
+
+  static async getPatientsWithHighBills() {
+    try {
+      const [rows] = await db.query(`
+        SELECT 
+          p.patient_id,
+          p.first_name,
+          p.last_name,
+          b.bill_id,
+          b.total_amount,
+          b.bill_date
+        FROM patient p
+        JOIN bills b ON p.patient_id = b.patient_id
+        WHERE b.total_amount > (
+          SELECT AVG(total_amount) 
+          FROM bills
+        )
+        ORDER BY b.total_amount DESC
+      `);
+      return rows;
+    } catch (error) {
+      console.error('Error in getPatientsWithHighBills:', error);
+      throw new Error('Error fetching patients with high bills');
+    }
+  }
 }
 
 export default Bill; 

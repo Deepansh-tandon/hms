@@ -4,24 +4,24 @@ import prescriptionController from '../controllers/prescriptionController.js';
 const router = express.Router();
 
 // Get all prescriptions
-router.get('/', prescriptionController.listPrescriptions);
+router.get('/prescription/', prescriptionController.listPrescriptions);
 
 // Get a single prescription
-router.get('/:id', prescriptionController.getPrescription);
+router.get('/prescription/:id', prescriptionController.getPrescription);
 
 // Get prescriptions by appointment
-router.get('/appointment/:appointmentId', prescriptionController.getAppointmentPrescriptions);
+router.get('/prescription/appointment/:appointmentId', prescriptionController.getAppointmentPrescriptions);
 
 // Get prescriptions by staff
-router.get('/staff/:staffId', prescriptionController.getStaffPrescriptions);
+router.get('/prescription/staff/:staffId', prescriptionController.getStaffPrescriptions);
 
 // Create a new prescription
-router.post('/', prescriptionController.createPrescription);
+router.post('/prescription/', prescriptionController.createPrescription);
 
 // Update a prescription
-router.put('/:id', prescriptionController.updatePrescription);
+router.put('/prescription/:id', prescriptionController.updatePrescription);
 
 // Delete a prescription
-router.delete('/:id', prescriptionController.deletePrescription);
+router.delete('/prescription/:id', prescriptionController.deletePrescription);
 
 export default router; 

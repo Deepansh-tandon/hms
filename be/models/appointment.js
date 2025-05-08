@@ -1,7 +1,7 @@
 import db from '../utils/db.js'
 
 class Appointment {
-  static async getAllappointment() {
+  static async getAllappointments() {
     try {
       const [rows] = await db.query('SELECT * FROM appointment');
       return rows;
@@ -79,6 +79,32 @@ class Appointment {
     } catch (error) {
       console.error('Error in deleteAppointment:', error);
       throw new Error('Error deleting appointment');
+    }
+  }
+
+  static async getDetailedAppointments() {
+    try {
+      const [rows] = await db.query(`
+        SELECT 
+          a.appointment_id,
+          a.appointment_date,
+          a.reason,
+          a.status,
+          p.first_name as patient_first_name,
+          p.last_name as patient_last_name,
+          s.first_name as doctor_first_name,
+          s.last_name as doctor_last_name,
+          d.name as department_name
+        FROM appointment a
+        JOIN patient p ON a.patient_id = p.patient_id
+        JOIN staff s ON a.staff_id = s.staff_id
+        JOIN department d ON s.department_id = d.department_id
+        ORDER BY a.appointment_date DESC
+      `);
+      return rows;
+    } catch (error) {
+      console.error('Error in getDetailedAppointments:', error);
+      throw new Error('Error fetching detailed appointments');
     }
   }
 }

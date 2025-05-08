@@ -2,7 +2,7 @@ import appointmentModel from '../models/appointment.js'
 
 export const listAppointments = async (req, res) => {
   try {
-    const appointments = await appointmentModel.getAllAppointments();
+    const appointments = await appointmentModel.getAllappointments();
     res.json({ 
       success: true,
       data: appointments 
@@ -57,7 +57,7 @@ export const getAppointmentsByPatient = async (req, res) => {
       });
     }
 
-    const appointments = await appointmentModel.getAppointmentsByPatient(patientId);
+    const appointments = await appointmentModel.getappointmentByPatient(patientId);
     res.json({ 
       success: true,
       data: appointments 
@@ -81,7 +81,7 @@ export const getAppointmentsByStaff = async (req, res) => {
       });
     }
 
-    const appointments = await appointmentModel.getAppointmentsByStaff(staffId);
+    const appointments = await appointmentModel.getappointmentByStaff(staffId);
     res.json({ 
       success: true,
       data: appointments 
